@@ -4,6 +4,8 @@ A wrapper to work with the [Spotify Web API](https://developer.spotify.com/web-a
 
 [![Build Status](https://app.travis-ci.com/adamsalves/spotify-wrapper.svg?token=ArSDBxVanqE8LANqAsds&branch=main)](https://app.travis-ci.com/adamsalves/spotify-wrapper)
 
+[![Coverage Status](https://coveralls.io/repos/github/adamsalves/spotify-wrapper/badge.svg?branch=main)](https://coveralls.io/github/adamsalves/spotify-wrapper?branch=main)
+
 ## Browser Support
 
 This library relies on [Fetch API](https://fetch.spec.whatwg.org/). And this API is supported in the following browsers.
