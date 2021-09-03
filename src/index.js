@@ -1,8 +1,10 @@
-import album from "./album";
-import search from "./search";
+/* global fetch */
 
-import { API_URL } from "./config";
-import toJSON from "./utils";
+import album from './album';
+import search from './search';
+
+import { API_URL } from './config';
+import toJSON from './utils';
 
 export default class SpotifyWrapper {
   constructor(options) {
