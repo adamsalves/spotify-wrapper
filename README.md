@@ -1,10 +1,9 @@
 # Spotify Wrapper
 
-A wrapper to work with the [Spotify Web API](https://developer.spotify.com/web-api/).
-
 [![Build Status](https://app.travis-ci.com/adamsalves/spotify-wrapper.svg?token=ArSDBxVanqE8LANqAsds&branch=main)](https://app.travis-ci.com/adamsalves/spotify-wrapper)
-
 [![Coverage Status](https://coveralls.io/repos/github/adamsalves/spotify-wrapper/badge.svg?branch=main)](https://coveralls.io/github/adamsalves/spotify-wrapper?branch=main)
+
+A wrapper to work with the [Spotify Web API](https://developer.spotify.com/web-api/).
 
 ## Browser Support
 
@@ -30,16 +29,24 @@ $ npm i spotify-wrapper-ad-api --save
 
 ```js
 // to import a specific method
-import { method } from 'spotify-wrapper-ad-api';
+import SpotifyWrapper from 'spotify-wrapper-ad-api';
 
-// to import everything
-import * as spotifyWrapper from 'spotify-wrapper-ad-api';
+const spotify = new SpotifyWrapper({
+  token: 'YOUR_TOKEN_HERE'
+});
+
+// using  method
+spotify.search.artists('Rush');
 ```
 
 ### CommonJS
 
 ```js
-var spotifyWrapper = require('spotify-wrapper-ad-api');
+const spotifyWrapper = require('spotify-wrapper-ad-api');
+
+const spotify = new SpotifyWrapper({
+  token: 'YOUR_TOKEN_HERE'
+});
 ```
 
 ### UMD in Browser
@@ -52,37 +59,22 @@ var spotifyWrapper = require('spotify-wrapper-ad-api');
 <script src="spotify-wrapper.umd.min.js"></script>
 ```
 
-After that the library will be available to the Global as `spotifyWrapper`. Follow an example:
+After that the library will be available to the Global as `SpotifyWrapper`. Follow an example:
 
 ```js
-const albums = spotifyWrapper.searchAlbums('Choosen Artist');
+
+const spotify = new SpotifyWrapper({
+  token: 'YOUR_TOKEN_HERE'
+});
+
+const albums = spotify.search.albums('Choosen Artist');
 ```
 
 ## Methods
 
 > Follow the methods that the library provides.
 
-### search(query, types)
-
-> Search for informations about artists, albums, tracks or playlists. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-search-item/).
-
-**Arguments**
-
-| Argument | Type              | Options                                 |
-|----------|-------------------|-----------------------------------------|
-|`query`   |*string*           | 'Any search query'                      |
-|`type`    |*Array of strings* | ['artist', 'album', 'track', 'playlist']|
-
-**Example**
-
-```js
-search('Incubus', ['artist', 'album'])
-  .then(data => {
-    // do what you want with the data
-  })
-```
-
-### searchAlbums(query)
+### search.albums(query)
 
 > Search for informations about Albums with provided query. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-search-item/) with type defined as *album*.
 
@@ -96,13 +88,13 @@ search('Incubus', ['artist', 'album'])
 **Example**
 
 ```js
-searchAlbums('Incubus')
+spotify.search.albums('Green Day')
   .then(data => {
     // do what you want with the data
   })
 ```
 
-### searchArtists(query)
+### search.artists(query)
 
 > Search for informations about Artists with provided query. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-search-item/) with type defined as *artist*.
 
@@ -116,13 +108,13 @@ searchAlbums('Incubus')
 **Example**
 
 ```js
-searchArtists('Incubus')
+spotify.search.artists('Pearl Jam')
   .then(data => {
     // do what you want with the data
   })
 ```
 
-### searchTracks(query)
+### search.tracks(query)
 
 > Search for informations about Tracks with provided query. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-search-item/) with type defined as *track*.
 
@@ -136,13 +128,13 @@ searchArtists('Incubus')
 **Example**
 
 ```js
-searchTracks('Drive')
+spotify.search.tracks('Al Jarreau')
   .then(data => {
     // do what you want with the data
   })
 ```
 
-### searchPlaylists(query)
+### search.playlists(query)
 
 > Search for informations about Playlist with provided query. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-search-item/) with type defined as *playlist*.
 
@@ -156,13 +148,13 @@ searchTracks('Drive')
 **Example**
 
 ```js
-searchPlaylists('Happy Day')
+spotify.search.playlists('The Clash')
   .then(data => {
     // do what you want with the data
   })
 ```
 
-### getAlbum(id)
+### album.getAlbum(id)
 
 > Search for informations about a specific Album with provided id. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-album/).
 
@@ -176,13 +168,13 @@ searchPlaylists('Happy Day')
 **Example**
 
 ```js
-getAlbum('4aawyAB9vmqN3uQ7FjRGTy')
+spotify.album.getAlbum('4aawyAB9vmqN3uQ7FjRGTy')
   .then(data => {
     // do what you want with the data
   })
 ```
 
-### getAlbums(ids)
+### album.getAlbums(ids)
 
 > Search for informations about some Albums with all id's. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-several-albums/).
 
@@ -195,13 +187,13 @@ getAlbum('4aawyAB9vmqN3uQ7FjRGTy')
 **Example**
 
 ```js
-getAlbum(['4aawyAB9vmqN3uQ7FjRGTy', '1A2GTWGtFfWp7KSQTwWOyo'])
+spotify.album.getAlbums(['4aawyAB9vmqN3uQ7FjRGTy', '1A2GTWGtFfWp7KSQTwWOyo'])
   .then(data => {
     // do what you want with the data
   })
 ```
 
-### getAlbumTracks(id)
+### album.getTracks(id)
 
 > Search for all tracks in a specific Album with provided id. Test in [Spotify Web Console](https://developer.spotify.com/web-api/console/get-album-tracks/).
 
@@ -214,7 +206,7 @@ getAlbum(['4aawyAB9vmqN3uQ7FjRGTy', '1A2GTWGtFfWp7KSQTwWOyo'])
 **Example**
 
 ```js
-getAlbum('4aawyAB9vmqN3uQ7FjRGTy')
+spotify.album.getTracks('4aawyAB9vmqN3uQ7FjRGTy')
   .then(data => {
     // do what you want with the data
   })
@@ -229,7 +221,6 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
-
 | ![Adams Alves](https://avatars.githubusercontent.com/u/2552756?v=4)|
 |:---------------------:|
 |  [Adams Alves](https://github.com/adamsalves/)   |
