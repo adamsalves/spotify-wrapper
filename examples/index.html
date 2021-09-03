@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Spotify Wrapper Test</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spotify Wrapper Test</title>
+  </head>
+  <body>
+    <div id="albums"></div>
 
-<div id="albums"></div>
+    <script src="../dist/spotify-wrapper.umd.js"></script>
 
-<script src="../dist/spotify-wrapper.umd.js"></script>
+    <script>
+      const spotify = new spotifyWrapper({
+        token:
+          "BQDQ7ryE793yebTTGqULgXCDRfZLNQRRRea4dQvhppXsZHYUkCizfvRaeA3qKCRkYZJQEOimeoy_8qZ6a4BU30iwb9vB8rwsHNmnmCTt4EgaJn9DTuYK4b8Wb7sXknpyr_Fza_6lR36U01PI",
+      });
+      const albums = spotify.search.albums("Rush");
+      const albumsEl = document.getElementById("albums");
 
-<script>
-  const albums = spotifyWrapper.searchAlbums('Green Day');
-  const albumsEl = document.getElementById('albums');
+      albums.then((data) => {
+        markup = data.albums.items
+          .map(
+            (item) => `<img src='${item.images[0].url}' alt='${item.name}' />`
+          )
+          .join("");
 
-  albums
-    .then(data => {
-      markup = data.albums.items.map(item =>
-        `<img src='${item.images[0].url}' alt='${item.name}' />`
-      ).join('');
-
-      albumsEl.innerHTML = markup;
-    })
-</script>
-</body>
+        albumsEl.innerHTML = markup;
+      });
+    </script>
+  </body>
 </html>
